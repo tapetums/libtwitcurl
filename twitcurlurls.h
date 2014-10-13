@@ -37,6 +37,10 @@ namespace twitCurlDefaults
     const std::string TWITCURL_INCLUDE_ENTITIES = "include_entities=";
     const std::string TWITCURL_STRINGIFY_IDS = "stringify_ids=";
     const std::string TWITCURL_INREPLYTOSTATUSID = "in_reply_to_status_id=";
+    const std::string TWITCURL_ID = "id=";
+    const std::string TWITCURL_EXCLUDE = "exclude=";
+    const std::string TWITCURL_LATITUDE = "lat=";
+    const std::string TWITCURL_LONGITUDE = "long=";
 
     /* URL separators */
     const std::string TWITCURL_URL_SEP_AMP = "&";
@@ -109,11 +113,9 @@ namespace twitterDefaults
     const std::string TWITCURL_SAVEDSEARCHDESTROY_URL = TWITCURL_BASE_URL + "saved_searches/destroy/";
 
     /* Trends URLs */
-    const std::string TWITCURL_TRENDS_URL = TWITCURL_BASE_URL + "trends";
-    const std::string TWITCURL_TRENDSDAILY_URL = TWITCURL_BASE_URL + "trends/daily";
-    const std::string TWITCURL_TRENDSCURRENT_URL = TWITCURL_BASE_URL + "trends/current";
-    const std::string TWITCURL_TRENDSWEEKLY_URL = TWITCURL_BASE_URL + "trends/weekly";
+    const std::string TWITCURL_TRENDS_URL = TWITCURL_BASE_URL + "trends/place";
     const std::string TWITCURL_TRENDSAVAILABLE_URL = TWITCURL_BASE_URL + "trends/available";
+    const std::string TWITCURL_TRENDSCLOSEST_URL = TWITCURL_BASE_URL + "trends/closest";
 
 };
 

@@ -1,6 +1,7 @@
 ﻿#ifndef _TWITCURL_H_
 #define _TWITCURL_H_
 
+#include <cstdint>
 #include <string>
 #include <sstream>
 #include <cstring>
@@ -111,11 +112,9 @@ public:
     bool savedSearchDestroy( std::string& searchId /* in */ );
 
     /* Twitter trends APIs (JSON) */
-    bool trendsGet();
-    bool trendsDailyGet();
-    bool trendsWeeklyGet();
-    bool trendsCurrentGet();
+    bool trendsGet(uint32_t id, std::string exclude = "");
     bool trendsAvailableGet();
+    bool trendsClosestGet(double latitude, double longitude);
 
     /* cURL APIs */
     bool isCurlInit();
@@ -138,7 +137,7 @@ public:
     /* Clones this object */
     twitCurl* clone();
 
-private:
+protected:
     /* cURL data */
     CURL* m_curlHandle;
     char* m_errorBuffer;

@@ -1380,81 +1380,36 @@ bool twitCurl::savedSearchDestroy( std::string& searchId )
 
 
 /*++
-* @method: twitCurl::trendsGet()
+* @method: twitCurl::trendsGet
 *
 * @description: gets trends.
 *
-* @input: none
+* @input: id
+*         exclude
 *
 * @output: true if GET is success, otherwise false. This does not check http
 *          response by twitter. Use getLastWebResponse() for that.
 *
 *--*/
-bool twitCurl::trendsGet()
+__declspec(deprecated("** this function no longer works after version 1.1 of the API **"))
+bool twitCurl::trendsGet(uint32_t id, std::string exclude)
 {
+    /* Set option */
+    std::string option = "";
+    if( exclude.length() )
+    {
+        option = twitCurlDefaults::TWITCURL_URL_SEP_AMP +
+                 twitCurlDefaults::TWITCURL_EXCLUDE + exclude;
+    }
+
     /* Perform GET */
     return performGet( twitCurlDefaults::TWITCURL_PROTOCOLS[m_eProtocolType] +
                        twitterDefaults::TWITCURL_TRENDS_URL +
-                       twitCurlDefaults::TWITCURL_EXTENSIONFORMATS[m_eApiFormatType] );
+                       twitCurlDefaults::TWITCURL_EXTENSIONFORMATS[m_eApiFormatType] +
+                       twitCurlDefaults::TWITCURL_URL_SEP_QUES +
+                       twitCurlDefaults::TWITCURL_ID + std::to_string(id) + option );
 }
 
-
-/*++
-* @method: twitCurl::trendsDailyGet()
-*
-* @description: gets daily trends.
-*
-* @input: none
-*
-* @output: true if GET is success, otherwise false. This does not check http
-*          response by twitter. Use getLastWebResponse() for that.
-*
-*--*/
-bool twitCurl::trendsDailyGet()
-{
-    /* Perform GET */
-    return performGet( twitCurlDefaults::TWITCURL_PROTOCOLS[m_eProtocolType] +
-                       twitterDefaults::TWITCURL_TRENDSDAILY_URL +
-                       twitCurlDefaults::TWITCURL_EXTENSIONFORMATS[m_eApiFormatType] );
-}
-
-/*++
-* @method: twitCurl::trendsWeeklyGet()
-*
-* @description: gets weekly trends.
-*
-* @input: none
-*
-* @output: true if GET is success, otherwise false. This does not check http
-*          response by twitter. Use getLastWebResponse() for that.
-*
-*--*/
-bool twitCurl::trendsWeeklyGet()
-{
-    /* Perform GET */
-    return performGet( twitCurlDefaults::TWITCURL_PROTOCOLS[m_eProtocolType] +
-                       twitterDefaults::TWITCURL_TRENDSWEEKLY_URL +
-                       twitCurlDefaults::TWITCURL_EXTENSIONFORMATS[m_eApiFormatType] );
-}
-
-/*++
-* @method: twitCurl::trendsCurrentGet()
-*
-* @description: gets current trends.
-*
-* @input: none
-*
-* @output: true if GET is success, otherwise false. This does not check http
-*          response by twitter. Use getLastWebResponse() for that.
-*
-*--*/
-bool twitCurl::trendsCurrentGet()
-{
-    /* Perform GET */
-    return performGet( twitCurlDefaults::TWITCURL_PROTOCOLS[m_eProtocolType] +
-                       twitterDefaults::TWITCURL_TRENDSCURRENT_URL +
-                       twitCurlDefaults::TWITCURL_EXTENSIONFORMATS[m_eApiFormatType] );
-}
 
 /*++
 * @method: twitCurl::trendsAvailableGet()
@@ -1473,6 +1428,31 @@ bool twitCurl::trendsAvailableGet()
     return performGet( twitCurlDefaults::TWITCURL_PROTOCOLS[m_eProtocolType] +
                        twitterDefaults::TWITCURL_TRENDSAVAILABLE_URL +
                        twitCurlDefaults::TWITCURL_EXTENSIONFORMATS[m_eApiFormatType] );
+}
+
+
+/*++
+* @method: twitCurl::trendsClosestGet
+*
+* @description: gets closest locations for trending topic information.
+*
+* @input: latitude  - limitied -180.0 to +180.0
+*         longitude - limitied -180.0 to +180.0
+*
+* @output: true if GET is success, otherwise false. This does not check http
+*          response by twitter. Use getLastWebResponse() for that.
+*
+*--*/
+bool twitCurl::trendsClosestGet(double latitude, double longitude)
+{
+    /* Perform GET */
+    return performGet( twitCurlDefaults::TWITCURL_PROTOCOLS[m_eProtocolType] +
+                       twitterDefaults::TWITCURL_TRENDSCLOSEST_URL +
+                       twitCurlDefaults::TWITCURL_EXTENSIONFORMATS[m_eApiFormatType] +
+                       twitCurlDefaults::TWITCURL_URL_SEP_QUES +
+                       twitCurlDefaults::TWITCURL_LATITUDE + std::to_string(latitude) +
+                       twitCurlDefaults::TWITCURL_URL_SEP_AMP +
+                       twitCurlDefaults::TWITCURL_LONGITUDE + std::to_string(longitude) );
 }
 
 /*++
